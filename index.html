@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Club Winner - Reto Escalera</title>
+  <style>
+    body {
+      margin: 0;
+      background: #39ff14; /* verde neón */
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    .logo {
+      margin-top: 20px;
+      max-width: 250px;
+      filter: drop-shadow(0 0 20px rgba(255,255,255,0.8))
+              drop-shadow(0 0 40px rgba(255,255,255,0.6));
+    }
+    .bienvenido {
+      margin-top: 20px;
+      max-width: 40%; /* reducido al 50% */
+    }
+
+    /* Texto promocional animado */
+    .promo-text {
+      margin-top: 25px;
+      font-size: 40px;
+      font-weight: bold;
+      text-align: center;
+      font-family: 'Georgia', serif;
+      color: #013220;
+      text-shadow: 
+        0 0 8px #00ff00, 
+        0 0 15px #00ff00, 
+        0 0 25px #39ff14, 
+        0 0 40px #00ff00;
+      opacity: 0;
+      transform: translateY(30px) scale(0.95);
+      animation: fadeInUp 1.5s ease forwards;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: .15em solid #39ff14; /* efecto cursor */
+    }
+
+    /* Animación de entrada */
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* Parpadeo/destellos */
+    @keyframes flicker {
+      0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
+      20%, 24%, 55% { opacity: 0.7; }
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 8px #00ff00, 0 0 15px #00ff00, 0 0 25px #39ff14; }
+      to   { text-shadow: 0 0 15px #39ff14, 0 0 25px #00ff00, 0 0 50px #39ff14; }
+    }
+
+    .telegram {
+      margin: 40px 0 15px 0;
+      width: 120px;
+      transition: transform 0.3s ease, filter 0.3s ease;
+      filter: drop-shadow(0 0 15px rgba(0, 136, 204, 0.9))
+              drop-shadow(0 0 30px rgba(0, 136, 204, 0.7));
+    }
+    .telegram:hover {
+      transform: scale(1.15);
+      filter: drop-shadow(0 0 25px rgba(0, 136, 204, 1))
+              drop-shadow(0 0 50px rgba(0, 136, 204, 0.9));
+    }
+
+    .counter-box {
+      margin-top: 25px;
+      background: linear-gradient(145deg, #FFD700, #FFA500, #FFD700);
+      border: 2px solid #DAA520;
+      border-radius: 12px;
+      padding: 15px 30px;
+      box-shadow: 0 0 15px rgba(218,165,32,0.9),
+                  inset 0 0 8px rgba(255,255,255,0.6);
+      display: inline-block;
+      text-align: center;
+      animation: shine 3s infinite linear;
+    }
+
+    @keyframes shine {
+      0% { box-shadow: 0 0 15px rgba(218,165,32,0.9), inset 0 0 8px rgba(255,255,255,0.6); }
+      50% { box-shadow: 0 0 25px rgba(255,215,0,1), inset 0 0 12px rgba(255,255,255,0.9); }
+      100% { box-shadow: 0 0 15px rgba(218,165,32,0.9), inset 0 0 8px rgba(255,255,255,0.6); }
+    }
+
+    .counter-text {
+      font-size: 18px;
+      color: white;
+      text-shadow: 0 0 6px black;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    .counter-number {
+      font-size: 28px;
+      font-weight: bold;
+      color: #fff;
+      text-shadow: 0 0 10px black, 0 0 15px gold;
+    }
+  </style>
+</head>
+<body>
+  <!-- Logo -->
+  <img src="WINNER CLUB.png" alt="Club Winner" class="logo">
+
+  <!-- Bienvenida -->
+  <img src="RETO PALABRA.png" alt="Bienvenido" class="bienvenido">
+
+  <!-- Texto promocional -->
+  <div class="promo-text" id="promo"></div>
+
+  <!-- Botón Telegram -->
+  <a href="https://t.me/winnerclubpremium" target="_blank">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram" class="telegram">
+  </a>
+
+  <!-- Contador -->
+  <div class="counter-box">
+    <div class="counter-text">Miembro nuevo</div>
+    <div class="counter-number" id="counter">82</div>
+  </div>
+
+  <script>
+    // Texto con efecto máquina de escribir
+    const promoText = "De $50.000 a $500.000 en 5 días";
+    let i = 0;
+    function typeWriter() {
+      if (i < promoText.length) {
+        document.getElementById("promo").textContent += promoText.charAt(i);
+        i++;
+        setTimeout(typeWriter, 80); // velocidad del tipeo
+      }
+    }
+    setTimeout(typeWriter, 1500); // comienza tras la animación fadeIn
+
+    // Contador dinámico
+    let count = 82;
+    let counter = document.getElementById("counter");
+
+    function updateCounter() {
+      let increase = Math.floor(Math.random() * 3) + 1;
+      count += increase;
+      counter.innerText = count.toLocaleString();
+      let nextUpdate = Math.floor(Math.random() * 3000) + 2000;
+      setTimeout(updateCounter, nextUpdate);
+    }
+    setTimeout(updateCounter, 3000);
+  </script>
+</body>
+</html>
+
